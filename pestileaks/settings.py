@@ -97,8 +97,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'pestileaks.urls'
@@ -122,6 +120,7 @@ INSTALLED_APPS = (
     'pestileaks',
     'south',
      'django.contrib.admin',
+     'django_extensions',
 )
 
 # A sample logging configuration. The only tangible logging

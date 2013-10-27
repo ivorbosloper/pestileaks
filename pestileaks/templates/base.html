@@ -1,0 +1,48 @@
+{% load static %}{% load url from future %}<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+  	<meta charset="utf-8"/>
+ 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pestileaks</title>
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/bootstrap-theme.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/style.css' %}" rel="stylesheet">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script type="text/javascript" href="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="http://platform.twitter.com/widgets.js"></script>
+  </head>
+  <body>
+	<header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+	  <div class="container">
+	    <div class="navbar-header">
+	      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a href="/" class="navbar-brand"{% if menuitem == 'index' %} style="color:white;"{%endif%}><i style="color:purple;" class="fa fa-pagelines"></i> Pestileaks</a>
+	    </div>
+	    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+	      <ul class="nav navbar-nav">
+	        <li{% if menuitem == 'app' %} class="active"{% endif %}><a href="/app">Applicatie</a></li>
+	        <li{% if menuitem == 'overview' %} class="active"{% endif %}><a href="/overview">Overzicht</a></li>
+	        <li{% if menuitem == 'motivation' %} class="active"{% endif %}><a href="/motivation">Waarom</a></li>
+	        <li{% if menuitem == 'contribute' %} class="active"{% endif %}><a href="/contribute">Help mee!</a></li>
+	      </ul>
+	    </nav>
+	  </div>
+	</header>
+
+	{% block content %}{%endblock%}	
+
+  </body>
+</html>

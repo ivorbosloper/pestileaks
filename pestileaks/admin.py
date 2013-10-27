@@ -7,3 +7,4 @@ admin.site.register(ToepassingsMethode)
 admin.site.register(Middel)
 admin.site.register(Aantasting)
 admin.site.register(GebruiksRegels)
+
