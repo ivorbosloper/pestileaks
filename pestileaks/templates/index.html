@@ -1,6 +1,94 @@
-<html>
-	<body>
-		<h1>Pestileaks</h1>
-		<p>Doe een query op onze database via <a href="service">/service</a></p>
-	</body>
-</html>
+{% extends "base.html" %}{% load static %}{% load url from future %}
+
+{% block content %}	
+    <div class="jumbotron">
+      <div class="container">
+	    <h1><i style="font-size: 1.1em; color:purple;" class="fa fa-pagelines"></i> Pestileaks <small>toegang tot toelatingen</small></h1>
+	    
+		<p>De <a href="http://www.ctb.agro.nl/portal/page?_pageid=33,46731&_dad=portal&_schema=PORTAL">bestrijdingsmiddelendatabank</a> van het 
+          	<a href="http://www.ctgb.nl/">CTGB</a> ontsluit regels omtrent het gebruik van middelen via Word documenten. Pestileaks maakt deze toelatingen doorzoekbaar en begrijpbaar
+          	voor computerprogramma's. Zo kan automatisch gecheckt worden of een (geplande) bewerking volgens de regels is, of kan een app de teler hierbij helpen.</p>
+          <!-- <p><a class="btn btn-primary btn-lg">Lees meer &raquo;</a></p> -->
+		  <form action="/app">
+			<div class="input-group">
+			  <input name="query" type="text" class="form-control" placeholder="zoek een gewas of middel">
+			    <span class="input-group-btn">
+			      <button class="btn btn-default" type="button">Zoek</button>
+			  </span>
+			</div><!-- /input-group -->
+		  </form>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+        <h1><i style="font-size: 1.1em;" class="fa fa-keyboard-o"></i> Samenwerken</h1>
+        <p>
+        	Omdat de data nu niet machine-leesbaar wordt aangeboden, typen zeker 10 mensen bij verschillende bedrijven wekelijks deze gegevens in hun eigen computersysteem over.
+        	Telers en adviseurs blijven de etiketteksten en toelatingsdocumenten lezen. Hiermee worden onnodig fouten gemaakt. Laten we de krachten bundelen en er gezamelijk voor zorgen dat
+        	deze gegevens voor iedereen vrij en gestructureerd toegangelijk zijn. <a href="/contribute">Help mee</a> als ontwikkelaar, teler of domeinexpert. Samen kunnen we dit veel slimmer! 
+        </p>
+	  </div>
+	  </div>
+	</div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <h2><i class="fa fa-bullhorn"></i> Hoe en wat?</h2>
+          <img class="pull-left half" src="{% static 'AMD.png' %}">
+          <p>Pestileaks is een van de <a href="http://www.agrimeetsdesign.com/polderhack/">prijs-winnende hacks</a> van de <a href="http://www.agrimeetsdesign.com/polderhack/">Polderhack</a> die werd gehouden in de <a href="http://www.agrimeetsdesign.com/">Dutch Design Week</a> 2013.</p>
+          <p>De <a href="http://www.agrimeetsdesign.com/polderhack/polderhack-programma/">pitch</a> van onderzoeksinstituut CLM en de beschikbaarheid van de open data vormde aanleiding om dit probleem te hacken</p>
+          <p><a class="btn btn-info" href="/motivation">Vertel me meer &raquo;</a></p>
+        </div>
+        <div class="col-lg-4">
+          <h2><i class="fa fa-mobile-phone"></i> Ontwikkelaars</h2>
+			<p>De api is bereikbaar via <a href="/service">http://pestileaks.nl/service</a>. Ondersteunde url-parameters zijn:</p>
+			<ul><li>gewas</li>
+				<li>aantasting</li>
+			</ul>
+			<p>Voorbeeld: <a href="/service?gewas=aardappel&aantasting=luizen">http://pestileaks.nl/service?gewas=aardappel&amp;aantasting=luizen</a></p>
+			<p>Het formaat is nog in ontwikkeling.</p>
+          <p><a class="btn btn-default" href="/service">Bekijk de service</a></p>
+        </div>
+        <div class="col-lg-4">
+          <h2><i class="fa fa-leaf"></i> Telers</h2>
+          <p>We hebben een simpele demo-app gemaakt om te zoeken naar toelatingen. Dit is niet bedoeld als oplossing voor het informatie-probleem, 
+          	maar dient als voorbeeld voor wat je met deze gegevens kunt doen mits je ze gestructureerd kunt doorzoeken en uitlezen.</p>
+          <p>We kijken uit naar de eerste toepassingen van de pestileaks data. <a href="https://twitter.com/intent/tweet?text=Ik+gebruik+pestileaks&tw_p=tweetbutton&url=http%3A%2F%2Fpestileaks.nl%2F&via=pestileaks">Laat even horen</a> als je de gegevens gebruikt in je app!</p>
+		  <form action="/app">
+			<div class="input-group">
+			  <input name="query" type="text" class="form-control" placeholder="zoek een gewas of middel">
+			    <span class="input-group-btn">
+			      <button class="btn btn-default" type="button">Zoek</button>
+			  </span>
+			</div>
+		  </form>
+		</div>
+     </div>
+    </div>
+
+
+    <footer class="bs-footer" role="contentinfo">
+    	<div class="container">
+	      <div class="bs-social">
+		  <ul class="bs-social-buttons">
+		    <li>
+		      <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=ivorbosloper&amp;repo=pestileaks&amp;type=watch&amp;count=true" width="80" height="20" title="Star on GitHub"></iframe>
+		    </li>
+		    <li>
+		      <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=ivorbosloper&amp;repo=pestileaks&amp;type=fork&amp;count=true" width="80" height="20" title="Fork on GitHub"></iframe>
+		    </li>
+		    <li class="follow-btn">
+		      <a href="https://twitter.com/pestileaks" class="twitter-follow-button" data-link-color="#0069D6" data-show-count="true">Follow @pestileaks</a>
+		    </li>
+		    <li class="tweet-btn">
+		      <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://pestileaks.nl/" data-count="horizontal" data-via="pestileaks" data-related="mdo:Toegang tot toelatingen">Tweet</a>
+		    </li>
+		  </ul>
+		</div>
+	  </div>
+    </footer>
+
+{% endblock content %}	
