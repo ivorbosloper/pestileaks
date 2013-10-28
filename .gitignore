@@ -38,3 +38,8 @@ ehthumbs.db
 Thumbs.db
 .*~
 *.pyc
+
+#### editor fluff stuff
+.project
+.pydevproject
+.settings
