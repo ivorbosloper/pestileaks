@@ -43,3 +43,4 @@ Thumbs.db
 .project
 .pydevproject
 .settings
+local_settings.py
