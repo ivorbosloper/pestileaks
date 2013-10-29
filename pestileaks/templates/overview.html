@@ -4,7 +4,7 @@
 <script type="text/javascript" src="{% static 'js/d3.js' %}"></script>
 <script>
 $(document).ready(function(){
-	var width = 800,
+	var width = 1140,
 	    height = width,
 	    radius = width / 2,
 	    x = d3.scale.linear().range([0, 2 * Math.PI]),
@@ -163,7 +163,13 @@ $(document).ready(function(){
 	        	en idealiter is de mestwetgeving (lijst nummer 3) hier ook aan te koppelen.
 	        </p>
 	    </div>
-        <div class="col-lg-8">
+	  </div>
+   </div>
+	    
+    <div class="container">
+      <div class="row">
+      	<h2><a name="gewassen"></a>Gewassen</h2>
+        <div class="col-lg-12">
         	<div id="vis"></div>
 	    </div>
 	  </div>

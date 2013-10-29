@@ -54,7 +54,7 @@ def _recurse(d, code_prefix, length):
     return [ _ne({'name':i.edi_naam, 'children':_recurse(d, i.edi_code, length+2)}) for i in d if i.edi_code.startswith(code_prefix) and len(i.edi_code)==length]
 
 def gewassen(request):
-    d = list(Gewas.objects.all().order_by('niveau', 'edi_code'))
+    d = list(Gewas.objects.all().distinct('niveau', 'edi_naam').order_by('niveau', 'edi_naam'))
     gewassen = _recurse(d, '', 1)
         
     return HttpResponse(json.dumps(gewassen), content_type="application/json")
