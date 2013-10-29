@@ -5,15 +5,15 @@ De bestrijdingsmiddelendatabank van het CTGB ontsluit regels omtrent het gebruik
 
 Dit initiatief is ontstaan op de Polderhack Hackaton (25 en 26 october 2013) in de Dutch Designweek. In de hack-groep zaten de volgende leden:
 
-Ivor Bosloper
-André van der Heijden
-Joske Houtkamp
-Arjan de Jong
-Rob Knapen
-Marcel van Mackelenbergh
-Johnny te Roller
-Jeroen Verschoore
-Anneloes Visser
-Wouter Zunneberg
+- Ivor Bosloper
+- André van der Heijden
+- Joske Houtkamp
+- Arjan de Jong
+- Rob Knapen
+- Marcel van Mackelenbergh
+- Johnny te Roller
+- Jeroen Verschoore
+- Anneloes Visser
+- Wouter Zunneberg
 
 Zie www.pestileaks.nl
