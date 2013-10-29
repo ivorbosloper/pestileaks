@@ -1,6 +1,9 @@
 from django.conf.urls import patterns, include, url
 
 from django.contrib import admin
+from tastypie.api import Api
+from pestileaks.api import GewasResource, ToepassingsMethodeResource,\
+    MiddelResource, AantastingResource, GebruiksRegelResource
 admin.autodiscover()
 
 urlpatterns = patterns('pestileaks.views',
@@ -15,3 +18,11 @@ urlpatterns = patterns('pestileaks.views',
     
     (r'^admin/', include(admin.site.urls)),
 )
+
+v1_api = Api(api_name='api')
+v1_api.register(GewasResource())
+v1_api.register(ToepassingsMethodeResource())
+v1_api.register(MiddelResource())
+v1_api.register(AantastingResource())
+v1_api.register(GebruiksRegelResource())
+urlpatterns += v1_api.urls

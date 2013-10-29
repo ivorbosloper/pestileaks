@@ -36,6 +36,7 @@ STATIC_ROOT = ''
 STATIC_URL = '/static/'
 
 INTERNAL_IPS = ('127.0.0.1',)
+TASTYPIE_DEFAULT_FORMATS = ['json'] # werkt pas vanaf 9.13
 
 # Additional locations of static files
 STATICFILES_DIRS = (
