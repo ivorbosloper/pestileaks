@@ -2,6 +2,7 @@
 
 {% block extrascript %}
 <script type="text/javascript" src="{% static 'js/d3.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.dataTables.min.js' %}"></script>
 <script>
 $(document).ready(function(){
 	var width = $('#vis').width(),
@@ -145,6 +146,35 @@ $(document).ready(function(){
 	}
 });
 </script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#toepassingsMethodes-table').dataTable({
+//		bProcessing: true,
+//		bServerSIde: true,
+		bFilter:false, bPaginate:false, bInfo:false,
+		sAjaxSource: "api/toepassingsmethode/?format=json",
+		sAjaxDataProp: "objects",
+		aoColumns: [
+			{'mData': "id"},
+			{'mData': "naam"},
+		],
+		fnServerData: function(source, oaData, callback, settings) {
+		settings.jqXHR = $.get(
+			source,
+			function(data){
+				data.echo = oaData.echo;
+				data.iTotalRecords = data.meta.total_count;
+				data.iTotalisplayRecords = data.meta.limit;
+				callback(data);
+			}, 
+			'json')
+		},
+	});
+});
+</script>
+
+
+<script src="http://d3js.org/colorbrewer.v1.min.js"></script>
 {% endblock extrascript %}
 
 {% block content %}	
@@ -186,10 +216,44 @@ $(document).ready(function(){
 	    
     <div class="container">
       <div class="row">
-      	<h2><a name="gewassen"></a>Gewassen <small>klik op een gewas / groep om de hiërarchie te ontdekken</small></h2>
-      	<p>De classificatie van gewassen is in 1) Teeltgroepen/toepassingssectoren &raquo; 2) Gewasgroepen, toepassingsgebieden &raquo; 3) Sub-gewasgroepen &raquo; 4) Gewassen. Hieronder staat de classificatie schematisch weergegeven.</p>
         <div class="col-lg-12">
-        	<div id="vis"></div>
+      	  <h2><a name="gewassen"></a><i class="fa fa-leaf"></i> Gewassen <small>klik op een gewas / groep om de hiërarchie te ontdekken</small></h2>
+      	  <p>De classificatie van gewassen is in 1) Teeltgroepen/toepassingssectoren &raquo; 2) Gewasgroepen, toepassingsgebieden &raquo; 3) Sub-gewasgroepen &raquo; 4) Gewassen. Hieronder staat de classificatie schematisch weergegeven.</p>
+          <div class="col-lg-12">
+        	  <div id="vis"></div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+	      	<h2><a name="toelatingen"></a><i class="fa fa-archive"></i> Toelatingen <small> de lijst waar het om gaat</small></h2>
+	      	<p>Dit moet nog gemaakt worden.</p>
+	    </div>
+	  </div>
+	</div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+	      <h2><a name="aantasters"></a><i class="fa fa-bug"></i> Aantasters</h2>
+	      <table id="aantasters-table" style="width:100%;" class="table-bordered">
+	  		<thead>
+	      	<tr><th>id</th><th>aantaster</th></tr>
+      		</thead>
+	      </table>
+	      
+	    </div>
+	    
+        <div class="col-lg-6">
+	      <h2><i class="fa fa-wrench"></i> Toepassingsmethodes</h2>
+	      <table id="toepassingsMethodes-table" style="width:100%;" class="table-bordered">
+	  		<thead>
+	      	<tr><th>id</th><th>methode</th></tr>
+      		</thead>
+	      </table>
 	    </div>
 	  </div>
 	</div>
