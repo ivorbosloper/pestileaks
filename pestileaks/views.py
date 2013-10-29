@@ -8,15 +8,15 @@ from collections import OrderedDict
 def index(request):
     return {'menuitem':'index'}
 
-@render_to('index.html')
+@render_to('app.html')
 def app(request):
     return {'menuitem':'app'}
 
-@render_to('index.html')
+@render_to('contribute.html')
 def contribute(request):
     return {'menuitem':'contribute'}
 
-@render_to('index.html')
+@render_to('motivation.html')
 def motivation(request):
     return {'menuitem':'motivation'}
 
