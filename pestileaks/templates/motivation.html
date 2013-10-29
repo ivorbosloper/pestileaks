@@ -1,0 +1,115 @@
+{% extends "base.html" %}{% load static %}{% load url from future %}
+
+{% block extrascript %}
+<style>
+.item img {
+  width: auto;
+  height: 270px;
+  max-height: 270px;
+}
+</style>
+{% endblock extrascript %}
+
+
+{% block content %}	
+<div class="jumbotron">
+  <div class="container">
+    <h1><i class="fa fa-thumbs-up"></i> Motivatie <small>vanwaar pestileaks?</small></h1>
+  </div>
+</div>
+    
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+		<h2><i class="fa fa-trophy"></i> Pestileaks in de prijzen</h2>
+		<div class="details">
+			29 oktober 2013
+		</div>
+	
+        <img class="pull-right" src="{% static "img/ShirtPolderhack.jpg" %}">
+		<p><strong>Dit weekend is 24 uur non-stop gewerkt door ICT designers, data- en kennisleveranciers aan het toegankelijk maken van informatie over gewasbeschermingsmiddelen. Zij hebben de basis gelegd voor een webservice en een app en daarmee een prijs gewonnen. De ‘hackers’ gingen deze uitdaging aan tijdens de Dutch Design Week. CLM en akkerbouwbedrijf Wilhelminapolder namen het initiatief voor deze zogenaamde ‘PestiLeaks’ met hun pitch over de noodzaak om gebruiksvoorschriften van pesticiden beschikbaar te maken voor telers.</strong></p>
+		<p>Eén van de initiatiefnemers van de PestiLeaks is Anneloes Visser van CLM. Samen met Jeroen Verschoore van akkerbouwbedrijf Wilhelminapolder enthousiasmeerde zij een groep ICT designers, data- en kennisleveranciers om aan de slag te gaan met gewasbeschermingsmiddeleninformatie. Dit deed zij tijdens de Polderhack, één van de activiteiten van Agri Meets Design, dat onderdeel is van de 12e editie van de Dutch Design Week.De Polderhack werd georganiseerd door het ministerie van EZ en TU Eindhoven. We stelden Anneloes een aantal vragen.</p>
+		<p><strong>Wat was de aanleiding voor de PestiLeaks?<br></strong>“Mijn pitch ging over het volgende probleem met betrekking tot open data: al jaren is er bij gebruikers en adviseurs grote behoefte aan informatie over bestrijdingsmiddelen. Die informatie is volop beschikbaar bij het CTGB (College voor de toelating van gewasbeschermingsmiddelen en biociden), maar deze informatie zit 'verstopt' in moeilijk toegankelijke toelatingsbesluiten. Veel gebruikers en adviseurs ontfutselen nu zelf de informatie aan deze&nbsp;besluiten. Hoogste tijd dus voor een bijzondere vorm van WikiLeaks: PestiLeaks! Het gaat daarbij niet om 'geheime' informatie, maar om verstopte informatie.”</p>
+		<p><strong>Wat was er zo bijzonder aan jullie aanpak?<br></strong>“Na de pitch is een groep ambitieuze ‘hackers’ aan de slag gegaan en is een hele nacht doorgewerkt. De sfeer was bijzonder, zoveel enthousiasme om samen naar één doel toe te werken. Bijzonder was ook dat er mensen van zoveel verschillende achtergronden mee deden. In mijn team zaten een boer, ICT'ers van Ordina, Alterra, Belastingdienst, Achmea en CropR. Ieder met hun eigen specialisatie: probleemeigenaar, hacken, apps bouwen, webservice maken.”</p>
+		<p><strong>En, wat heeft het precies opgeleverd?<br></strong>“In 24 uur is CTGB informatie ontsloten en is gewerkt aan een webservice en app. Hiermee kan voor elk gewas worden opgezocht welke middelen zijn toegelaten en wat de gebruiksvoorschriften zijn. We hebben zaterdag de Grootste Oogst Prijs gewonnen, omdat ons werk in korte tijd zoveel heeft opgeleverd voor de boer.”</p>
+		<p><strong>Dit vraagt om vervolgstappen; hoe gaan jullie hiermee verder?<br></strong>“De groep is niet te stoppen, er wordt nog steeds nagedacht en gewerkt aan de data die beschikbaar is gekomen en uitbreiding daarvan. CLM en CropR gaan bekijken hoe de webservice en app verder gebracht kunnen worden, samen met het PestiLeaks-team. We willen de informatie bijvoorbeeld ook koppelen aan onze Milieumeetlat.”</p>
+	</div>
+
+    <div class="col-lg-4">
+    	<h3><i class="fa fa-group"></i> Het pestileaks team</h3>
+    	<ul>
+			<li>Ivor Bosloper</li>
+			<li>André van der Heijden</li>
+			<li>Joske Houtkamp</li>
+			<li>Arjan de Jong</li>
+			<li>Rob Knapen</li>
+			<li>Marcel van Mackelenbergh</li>
+			<li>Johnny te Roller</li>
+			<li>Jeroen Verschoore</li>
+			<li>Anneloes Visser</li>
+			<li>Wouter Zunneberg</li>
+    	</ul>
+    	<p>Zie onze <a href="{% static 'static/pitch.pptx' %}">presentatie</a> op de polderhack.</p>
+		{% comment %}<a class="twitter-timeline" href="https://twitter.com/pestileaks" data-widget-id="394732157538557952">Tweets van @pestileaks</a> {%endcomment%}
+
+		<div>
+			<div id="carousel" class="carousel slide">
+			  <ol class="carousel-indicators">
+			    <li data-target="#carousel" data-slide-to="0" class="active"></li>
+			    <li data-target="#carousel" data-slide-to="1"></li>
+			    <li data-target="#carousel" data-slide-to="2"></li>
+			    <li data-target="#carousel" data-slide-to="3"></li>
+			    <li data-target="#carousel" data-slide-to="4"></li>
+			    <li data-target="#carousel" data-slide-to="5"></li>
+			  </ol>
+			
+			  <div class="carousel-inner">
+			    <div class="item active">
+			      <img src="{% static 'img/hackaton/team_work.jpg' %}" alt="Aan het werk">
+			      <div class="carousel-caption">Aan het werk</div>
+			    </div>
+			    <div class="item">
+			      <img src="{% static 'img/hackaton/presentatie1.jpg' %}" alt="presentatie">
+			      <div class="carousel-caption">Presentatie</div>
+			    </div>
+			    <div class="item">
+			      <img src="{% static 'img/hackaton/presentatie2.jpg' %}" alt="presentatie">
+			      <div class="carousel-caption">Presentatie</div>
+			    </div>
+			    <div class="item">
+			      <img src="{% static 'img/hackaton/shirt.jpg' %}" alt="Farmer inside">
+			      <div class="carousel-caption">Farmer inside</div>
+			    </div>
+			    <div class="item">
+			      <img src="{% static 'img/hackaton/presentatie3.jpg' %}" alt="presentatie">
+			      <div class="carousel-caption">Presentatie</div>
+			    </div>
+			    <div class="item">
+			      <img src="{% static 'img/hackaton/presentatie4.jpg' %}" alt="presentatie">
+			      <div class="carousel-caption">Presentatie</div>
+			    </div>
+			  </div>
+			
+			  <!-- Controls -->
+			  <a class="left carousel-control" href="#carousel" data-slide="prev">
+			    <span class="icon-prev"></span>
+			  </a>
+			  <a class="right carousel-control" href="#carousel" data-slide="next">
+			    <span class="icon-next"></span>
+			  </a>
+			</div>
+		</div>
+    </div>
+  </div>
+</div>
+
+<hr/>
+  
+<div class="container">
+  <div class="row">
+  </div>
+</div>
+
+
+{% endblock content %}	
+ 

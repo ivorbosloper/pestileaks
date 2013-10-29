@@ -12,14 +12,13 @@
 		<p>De <a href="http://www.ctb.agro.nl/portal/page?_pageid=33,46731&_dad=portal&_schema=PORTAL">bestrijdingsmiddelendatabank</a> van het 
           	<a href="http://www.ctgb.nl/">CTGB</a> ontsluit regels omtrent het gebruik van middelen via Word documenten. Pestileaks maakt deze toelatingen doorzoekbaar en begrijpbaar
           	voor computerprogramma's. Zo kan automatisch gecheckt worden of een (geplande) bewerking volgens de regels is, of kan een app de teler hierbij helpen.</p>
-          <!-- <p><a class="btn btn-primary btn-lg">Lees meer &raquo;</a></p> -->
 		  <form action="/app">
 			<div class="input-group">
 			  <input name="query" type="text" class="form-control" placeholder="zoek een gewas of middel">
 			    <span class="input-group-btn">
 			      <button class="btn btn-default" type="button">Zoek</button>
 			  </span>
-			</div><!-- /input-group -->
+			</div>
 		  </form>
       </div>
     </div>
@@ -46,7 +45,7 @@
       <div class="row">
         <div class="col-lg-4">
           <h2><i class="fa fa-bullhorn"></i> Hoe en wat?</h2>
-          <img class="pull-left half" src="{% static 'AMD.png' %}">
+          <img class="pull-left half" src="{% static 'img/AMD.png' %}">
           <p>Pestileaks is een van de <a href="http://www.agrimeetsdesign.com/polderhack/">prijs-winnende hacks</a> van de <a href="http://www.agrimeetsdesign.com/polderhack/">Polderhack</a> die werd gehouden in de <a href="http://www.agrimeetsdesign.com/">Dutch Design Week</a> 2013.</p>
           <p>De <a href="http://www.agrimeetsdesign.com/polderhack/polderhack-programma/">pitch</a> van onderzoeksinstituut CLM en de beschikbaarheid van de open data vormde aanleiding om dit probleem te hacken</p>
           <p><a class="btn btn-info" href="/motivation">Vertel me meer &raquo;</a></p>
@@ -78,26 +77,27 @@
      </div>
     </div>
 
-
-    <footer class="bs-footer" role="contentinfo">
-    	<div class="container">
-	      <div class="bs-social">
-		  <ul class="bs-social-buttons">
-		    <li>
-		      <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=ivorbosloper&amp;repo=pestileaks&amp;type=watch&amp;count=true" width="80" height="20" title="Star on GitHub"></iframe>
-		    </li>
-		    <li>
-		      <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=ivorbosloper&amp;repo=pestileaks&amp;type=fork&amp;count=true" width="80" height="20" title="Fork on GitHub"></iframe>
-		    </li>
-		    <li class="follow-btn">
-		      <a href="https://twitter.com/pestileaks" class="twitter-follow-button" data-link-color="#0069D6" data-show-count="true">Follow @pestileaks</a>
-		    </li>
-		    <li class="tweet-btn">
-		      <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://pestileaks.nl/" data-count="horizontal" data-via="pestileaks" data-related="mdo:Toegang tot toelatingen">Tweet</a>
-		    </li>
-		  </ul>
-		</div>
-	  </div>
-    </footer>
-
 {% endblock content %}	
+
+{% block footer %}
+<footer class="bs-footer" role="contentinfo">
+	<div class="container">
+      <div class="bs-social">
+	  <ul class="bs-social-buttons">
+	    <li>
+	      <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=ivorbosloper&amp;repo=pestileaks&amp;type=watch&amp;count=true" width="80" height="20" title="Star on GitHub"></iframe>
+	    </li>
+	    <li>
+	      <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=ivorbosloper&amp;repo=pestileaks&amp;type=fork&amp;count=true" width="80" height="20" title="Fork on GitHub"></iframe>
+	    </li>
+	    <li class="follow-btn">
+	      <a href="https://twitter.com/pestileaks" class="twitter-follow-button" data-link-color="#0069D6" data-show-count="true">Follow @pestileaks</a>
+	    </li>
+	    <li class="tweet-btn">
+	      <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://pestileaks.nl/" data-count="horizontal" data-via="pestileaks" data-related="mdo:Toegang tot toelatingen">Tweet</a>
+	    </li>
+	  </ul>
+	</div>
+  </div>
+</footer>
+{% endblock footer %}

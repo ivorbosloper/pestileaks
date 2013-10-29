@@ -1,0 +1,19 @@
+{% extends "base.html" %}{% load static %}{% load url from future %}
+
+{% block extrascript %}
+<script src="http://platform.twitter.com/widgets.js"></script>
+{% endblock extrascript %}
+
+{% block content %}
+    <div class="jumbotron">
+      <div class="container">
+	    <h1><i class="fa fa-"></i> Meehelpen <small>help ons mee</small></h1>
+	    <p><b>Ken je de regels omtrent toelatingen?</b> We hebben mensen nodig die kunnen controleren of onze gegevens kloppen. 
+    		Hoe gaan we om met analyse van de data, hoe presenteren we dit op een manier waarmee telers kunnen werken?</p>
+	    <p><b>Kun je programmeren?</b> Alles staat op <a href="https://github.com/ivorbosloper/pestileaks">github</a>.
+	    	We willen de data nog goed analyseren en doorzoekbaar maken, deze site kan nog een stuk beter, we willen nog een app, welke licentie gaan we gebruiken...</p>	    	
+	    	<p><b>Weet je wat van communicatie?</b> Hoe gaan we dit goed communiceren naar de wereld, via twitter, deze site?</p>
+	    	<p>Kortom, genoeg te doen! Meld je aan via <a href="https://twitter.com/intent/tweet?screen_name=pestileaks" class="twitter-mention-button" data-lang="en">@pestileaks</a></p>
+      </div>
+    </div>
+{% endblock content %}

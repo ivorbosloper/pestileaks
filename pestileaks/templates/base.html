@@ -5,7 +5,6 @@
  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pestileaks</title>
 	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-	<link href="{% static 'css/bootstrap-theme.min.css' %}" rel="stylesheet">
 	<link href="{% static 'css/style.css' %}" rel="stylesheet">
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
 
@@ -34,7 +33,7 @@
 	    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
 	      <ul class="nav navbar-nav">
 	        <li{% if menuitem == 'app' %} class="active"{% endif %}><a href="/app">Applicatie</a></li>
-	        <li{% if menuitem == 'overview' %} class="active"{% endif %}><a href="/overview">Overzicht</a></li>
+	        <li{% if menuitem == 'overview' %} class="active"{% endif %}><a href="/overview">Data</a></li>
 	        <li{% if menuitem == 'motivation' %} class="active"{% endif %}><a href="/motivation">Waarom</a></li>
 	        <li{% if menuitem == 'contribute' %} class="active"{% endif %}><a href="/contribute">Help mee!</a></li>
 	      </ul>
@@ -42,7 +41,8 @@
 	  </div>
 	</header>
 
-	{% block content %}{%endblock%}	
+	{% block content %}{%endblock content%}	
+	{% block footer %}<hr/><div class="container"><div class="row" style="text-align:center">Pestileaks is nog volop in opbouw. <a href="/contribute">Help mee!</a></div></div>{%endblock footer %}	
 
 	<script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
