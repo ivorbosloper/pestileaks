@@ -10,7 +10,8 @@ $(document).ready(function(){
 	    x = d3.scale.linear().range([0, 2 * Math.PI]),
 	    y = d3.scale.pow().exponent(1.3).domain([0, 1]).range([0, radius]),
 	    padding = 5,
-	    duration = 1000;
+	    duration = 1000,
+	    color = d3.scale.category20b();
 	
 	var div = d3.select("#vis");
 	
@@ -42,15 +43,15 @@ $(document).ready(function(){
 	      .attr("id", function(d, i) { return "path-" + i; })
 	      .attr("d", arc)
 	      .attr("fill-rule", "evenodd")
-	      .style("fill", colour)
+	      .style("fill", function(d) { return color((d.children ? d : d.parent).name); })
 	      .on("click", click);
 	
 	  var text = vis.selectAll("text").data(nodes);
 	  var textEnter = text.enter().append("text")
 	      .style("fill-opacity", 1)
-	      .style("fill", function(d) {
-	        return brightness(d3.rgb(colour(d))) < 125 ? "#eee" : "#000";
-	      })
+	      .style("fill", '#000' /*function(d) {
+	        return brightness(d3.rgb( color((d.children ? d : d.parent).name)  )) < 125 ? "#eee" : "#000";
+	      }*/)
 	      .attr("text-anchor", function(d) {
 	        return x(d.x + d.dx / 2) > Math.PI ? "end" : "start";
 	      })
@@ -116,7 +117,7 @@ $(document).ready(function(){
 	    // There is a maximum of two children! TODO: fix this!
 	    var colours = d.children.map(colour),
 	        a = d3.hsl(colours[0]),
-	        b = d3.hsl(colours[1]);
+	        b = d3.hsl(colours[colours.length-1]);
 	    // L*a*b* might be better here...
 	    return d3.hsl((a.h + b.h) / 2, a.s * 1.2, a.l / 1.2);
 	  }
