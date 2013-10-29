@@ -36,7 +36,7 @@ class Gewas(Model):
         return self.edi_code[:-2]
     
     def __unicode__(self):
-        return self.naam
+        return self.edi_naam
     
     class Meta:
         ordering = ['edi_naam','edi_code']
