@@ -28,7 +28,7 @@ def service(request): # gewas, aantaster, ...
     #gewas = request.GET['gewas'], aantaster
     filters = {}
     if 'gewas' in request.GET:
-        filters['gewas__in'] = Gewas.objects.filter(naam__icontains=request.GET['gewas'])
+        filters['gewas__in'] = Gewas.objects.filter(edi_naam__icontains=request.GET['gewas'])
     if 'aantasting' in request.GET:
         filters['aantasting__in'] = Aantasting.objects.filter(naam__icontains=request.GET['aantasting'])
 
