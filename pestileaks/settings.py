@@ -20,7 +20,7 @@ DATABASES = {
     }
 }
 
-ALLOWED_HOSTS = ['*.pestileaks.nl']
+ALLOWED_HOSTS = ['.pestileaks.nl']
 TIME_ZONE = 'Europe/Amsterdam'
 LANGUAGE_CODE = 'nl'
 
