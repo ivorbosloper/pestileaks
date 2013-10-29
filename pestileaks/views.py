@@ -50,7 +50,7 @@ def _ne(dic):
     return dic
 
 def _recurse(d, code_prefix, length):
-    print "recurse %s %s" % (code_prefix, length)
+    #print "recurse %s %s" % (code_prefix, length)
     return [ _ne({'name':i.edi_naam, 'children':_recurse(d, i.edi_code, length+2)}) for i in d if i.edi_code.startswith(code_prefix) and len(i.edi_code)==length]
 
 def gewassen(request):

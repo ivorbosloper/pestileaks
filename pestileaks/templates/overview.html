@@ -113,7 +113,7 @@ $(document).ready(function(){
 	
 	function colour(d) {
 	  if (d.children) {
-	    // There is a maximum of two children!
+	    // There is a maximum of two children! TODO: fix this!
 	    var colours = d.children.map(colour),
 	        a = d3.hsl(colours[0]),
 	        b = d3.hsl(colours[1]);
@@ -162,6 +162,23 @@ $(document).ready(function(){
 	        	gewasgroepen en eindproducten. We willen de toelatingen onstluiten in de gewascodes van <a href="http://www.agroconnect.nl/">editeelt</a>,
 	        	en idealiter is de mestwetgeving (lijst nummer 3) hier ook aan te koppelen.
 	        </p>
+	        <p><a class="btn btn-default" href="#gewassen">Bekijk de gewassen data</a></p>
+
+	    </div>
+        <div class="col-lg-4">
+	        <h2><i class="fa fa-archive"></i> Toelatingen</h2>
+	        <p>
+	        	De toelatingen worden nu gehaald van de e <a href="http://www.ctb.agro.nl/portal/page?_pageid=33,46731&_dad=portal&_schema=PORTAL">bestrijdingsmiddelendatabank</a> 
+	        	en van de site van <a href="http://www.ctgb.nl/">CTGB</a>. De uitdaging is om deze documenten correct te analyseren.
+	        </p>
+	        <p><a class="btn btn-default" href="#toelatingen">Bekijk de lijst met toelatingen</a></p>
+	    </div>
+        <div class="col-lg-4">
+	        <h2><i class="fa fa-bug"></i> Aantasters, toepassingsmethodes</h2>
+	        <p>
+	        	De middelen aantasters en toepassingsmethodes zijn twee korte lijsten die we langzamerhand opbouwen.
+	        </p>
+	        <p><a class="btn btn-default" href="#aantasters">Bekijk de lijst met aantasters en toepassingsmethodes</a></p>
 	    </div>
 	  </div>
    </div>
