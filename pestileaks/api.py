@@ -1,17 +1,41 @@
-from tastypie.resources import ModelResource
+from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from models import Gewas, ToepassingsMethode, Middel, Aantasting, GebruiksRegel
+from django.db.models import Q
+import operator
+
+class QModelResource(ModelResource):
+    def apply_filters(self, request, applicable_filters):
+        object_list = super(QModelResource, self).apply_filters(request, applicable_filters)
+        query = request.GET.get('query', None)
+        if query:
+            fields = [f for f in self._meta.filtering.keys() if f not in applicable_filters]
+            if fields:
+                qset = reduce(operator.or_, [Q((f+'__icontains',query)) for f in fields])
+                object_list = object_list.filter(qset)
+        return object_list
 
 class GewasResource(ModelResource):
     class Meta:
         queryset = Gewas.objects.all()
-
+        ordering=['id', 'naam']
+        filtering = {
+            'naam': ALL,
+        }
+        
 class ToepassingsMethodeResource(ModelResource):
     class Meta:
         queryset = ToepassingsMethode.objects.all()
+        ordering=['id', 'naam']
 
-class MiddelResource(ModelResource):
+class MiddelResource(QModelResource):
     class Meta:
         queryset = Middel.objects.all()
+        ordering=['id', 'naam', 'bedrijf', 'toelatings_nummer']
+        filtering = {
+            'naam': ALL,
+            'bedrijf': ALL,
+            'toelatings_nummer': ALL
+        }
 
 class AantastingResource(ModelResource):
     class Meta:

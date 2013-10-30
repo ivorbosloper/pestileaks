@@ -103,22 +103,35 @@ INSTALLED_APPS = (
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
+    'formatters': {
+        'debug': {
+            'format': '%(levelname)-7s%(name)s.%(module)s:%(lineno)-3d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
     },
     'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
+        'verbose': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
         }
     },
     'loggers': {
         'django.request': {
-            'handlers': ['mail_admins'],
+            'handlers': ['verbose'],
             'level': 'ERROR',
+            'propagate': True,
+        },
+        'pestileaks': {
+            'handlers': ['verbose'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'tastypie': {
+            'handlers': ['verbose'],
+            'level': 'DEBUG',
             'propagate': True,
         },
     }
