@@ -1,0 +1,12 @@
+Leverancier	Afkorting	Website
+Agrichem B.V.	AGC	http://www.agrichem.nl/
+BASF Nederland B.V.	BAS	http://agro.basf.nl
+Bayer CropScience SA-NV	BCS	http://www.bayercropscience.nl
+Bayer Environmental Science	BES	http://www.bayergarden.nl
+Certis Europe B.V.	CTS	http://www.certiseurope.nl
+Dow AgroSciences B.V.	DOW	http://www.dowagro.nl
+Dupont de Nemours (Nederland) B.V.	DUP	http://www.nld.ag.dupont.com
+Makhteshim Agan Holland B.V.	MAK	http://www.mabeno.com
+Monsanto Europe S.A.	MON	http://www.monsanto.com
+Nufarm	NUF	http://www.nufarm.nl
+Syngenta Crop Protection B.V.	SYN	http://www.syngentacropprotection.nl
