@@ -1,8 +1,9 @@
 from annoying.decorators import render_to
 import json
 from django.http import HttpResponse
-from pestileaks.models import Gewas, GebruiksRegel, Aantasting
+from pestileaks.models import Gewas, GebruiksRegel, Aantasting, Middel
 from collections import OrderedDict
+import itertools
 
 @render_to('index.html')
 def index(request):
@@ -43,20 +44,27 @@ def service(request): # gewas, aantaster, ...
                                 } for r in regels]
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
+#kick empty elements from dict
 def _ne(dic):
     for k,v in dic.items():
         if v == None or v == '' or v == []:
             del dic[k]
     return dic
 
-def _recurse(d, code_prefix, length):
-    #print "recurse %s %s" % (code_prefix, length)
-    return [ _ne({'name':i.edi_naam, 'children':_recurse(d, i.edi_code, length+2)}) for i in d if i.edi_code.startswith(code_prefix) and len(i.edi_code)==length]
-
 def gewassen(request):
+    def _recurse(d, code_prefix, length):
+        return [ _ne({'name':i.edi_naam, 'children':_recurse(d, i.edi_code, length+2)}) for i in d if i.edi_code.startswith(code_prefix) and len(i.edi_code)==length]
     d = list(Gewas.objects.all().distinct('niveau', 'edi_naam').order_by('niveau', 'edi_naam'))
     gewassen = _recurse(d, '', 1)
         
     return HttpResponse(json.dumps(gewassen), content_type="application/json")
 
+# group by bedrijf, doel, gewas, etc
+def middelen(request):
+    minsize = int(request.GET['minsize']) if request.GET['minsize'] else 0
+    middel_per_bedrijf = []
+    for bedrijf,iter in itertools.groupby(Middel.objects.all().order_by('bedrijf', 'naam'), lambda m: m.bedrijf):
+        middelen = list(iter)
+        if len(middelen) > minsize: middel_per_bedrijf.append({'name':bedrijf, 'children':[{'name': m.naam} for m in middelen]})
+    return HttpResponse(json.dumps(middel_per_bedrijf), content_type="application/json")
     

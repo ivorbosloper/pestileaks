@@ -21,6 +21,39 @@
   stroke-width: 1.5px;
 }
 
+
+text {
+  font-size: 11px;
+  pointer-events: none;
+}
+
+text.parent {
+  fill: #1f77b4;
+  font-weight:bold;
+}
+
+circle {
+  fill: #ccc;
+  stroke: #999;
+  pointer-events: all;
+}
+
+circle.parent {
+  fill: #1f77b4;
+  fill-opacity: .1;
+  stroke: steelblue;
+}
+
+circle.parent:hover {
+  stroke: #ff7f0e;
+  stroke-width: .5px;
+}
+
+circle.child {
+  pointer-events: none;
+}
+
+
 </style>
 <script type="text/javascript" src="{% static 'd3js/d3.js' %}"></script>
 <script type="text/javascript" src="{% static 'datatables/js/jquery.dataTables.min.js' %}"></script>
@@ -119,7 +152,7 @@ $(document).ready(function(){
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-      	  <h2><a name="gewassen"></a><i class="fa fa-leaf"></i> Gewassen <small>klik op een gewas / groep om de hiërarchie te ontdekken</small></h2>
+      	  <h2><a name="gewassen"></a><i class="fa fa-leaf"></i> Gewassen <small>onderzoek de gewas / groep hiërarchie</small></h2>
       	  <p>De classificatie van gewassen is in 1) Teeltgroepen/toepassingssectoren &raquo; 2) Gewasgroepen, toepassingsgebieden &raquo; 3) Sub-gewasgroepen &raquo; 4) Gewassen. Hieronder staat de classificatie schematisch weergegeven.</p>
           <div class="col-lg-12">
         	  <div id="vis"></div>
@@ -142,6 +175,8 @@ $(document).ready(function(){
 	  </div>
       <div class="row">
         <div class="col-lg-12">
+	      <h2><i class="fa fa-bullseye"></i> Middelen per fabrikant <small> toegelaten middelen in Nederland</small></h2>
+
     	  <div id="middelen-graphic"></div>
 	    </div>
 	  </div>

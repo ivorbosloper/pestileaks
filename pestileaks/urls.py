@@ -15,6 +15,7 @@ urlpatterns = patterns('pestileaks.views',
 
     url(r'^service/?$', 'service', name='service'),
     url(r'^gewassen.json/?$', 'gewassen', name='gewassen'),
+    url(r'^middelen.json/?$', 'middelen', name='middelen'),
     
     (r'^admin/', include(admin.site.urls)),
 )

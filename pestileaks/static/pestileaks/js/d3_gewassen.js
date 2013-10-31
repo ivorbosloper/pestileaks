@@ -1,4 +1,4 @@
-$(document).ready(function(){
+function gewassen_wheel() {
 	var width = $('#vis').width(),
 	    height = width,
 	    radius = width / 2,
@@ -137,12 +137,11 @@ $(document).ready(function(){
 	function brightness(rgb) {
 	  return rgb.r * .299 + rgb.g * .587 + rgb.b * .114;
 	}
-});
+}
 
 /* alternatief op de gewassen, ziet er ook vet uit! */
-$(document).ready(function(){
-	return;
-	var diameter = $("#middelen-graphic").width();
+function gewassen_rotating_cluster() {
+	var diameter = $("#vis").width();
 	
 	var tree = d3.layout.tree()
 	    .size([360, diameter / 2 - 120])
@@ -152,7 +151,7 @@ $(document).ready(function(){
 	    .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
 
 	
-	var svg = d3.select("#middelen-graphic").append("svg")
+	var svg = d3.select("#vis").append("svg")
 	    .attr("width", diameter)
 	    .attr("height", diameter)
 	  .append("g")
@@ -185,4 +184,79 @@ $(document).ready(function(){
 	});
 	
 	d3.select(self.frameElement).style("height", diameter - 150 + "px");
+}
+
+$(document).ready(function(){
+	var w = $('#middelen-graphic').width(),
+	    h = w,
+	    r = h-80,
+	    x = d3.scale.linear().range([0, r]),
+	    y = d3.scale.linear().range([0, r]),
+	    node,
+	    root;
+
+	var pack = d3.layout.pack()
+	    .size([r, r])
+	    .value(function(d) { return d.size || 1; })
+	
+	var vis = d3.select("#middelen-graphic").insert("svg:svg", "h2")
+	    .attr("width", w)
+	    .attr("height", h)
+	  .append("svg:g")
+	    .attr("transform", "translate(" + (w - r) / 2 + "," + (h - r) / 2 + ")");
+	
+	d3.json("middelen.json?minsize=10", function(data) {
+	  node = root = {children: data};
+	
+	  var nodes = pack.nodes(root);
+	
+	  vis.selectAll("circle")
+	      .data(nodes)
+	    .enter().append("svg:circle")
+	      .attr("class", function(d) { return d.children ? "parent" : "child"; })
+	      .attr("cx", function(d) { return d.x; })
+	      .attr("cy", function(d) { return d.y; })
+	      .attr("r", function(d) { return d.r; })
+	      .on("click", function(d) { return zoom(node == d ? root : d); });
+	
+	  vis.selectAll("text")
+	      .data(nodes)
+	    .enter().append("svg:text")
+	      .attr("class", function(d) { return d.children ? "parent" : "child"; })
+	      .attr("x", function(d) { return d.x; })
+	      .attr("y", function(d) { return d.y - (d.children ? 10 : 0); })
+	      .attr("dy", ".35em")
+	      .attr("text-anchor", "middle")
+	      .style("opacity", function(d) { return d.r > 20 ? 1 : 0; })
+	      .text(function(d) { return (d.children&&d.name)?d.name.replace(/Nederland|(N|B)\.V\.|A\.G\.|NV$|S.A.|Holland|gmbh|SA-N\.V\.|ltd\.|SA$/gi,''):d.name; });
+	
+	  d3.select(window).on("click", function() { zoom(root); });
+	});
+	
+	function zoom(d, i) {
+	  var k = r / d.r / 2;
+	  x.domain([d.x - d.r, d.x + d.r]);
+	  y.domain([d.y - d.r, d.y + d.r]);
+	
+	  var t = vis.transition()
+	      .duration(d3.event.altKey ? 7500 : 750);
+	
+	  t.selectAll("circle")
+	      .attr("cx", function(d) { return x(d.x); })
+	      .attr("cy", function(d) { return y(d.y); })
+	      .attr("r", function(d) { return k * d.r; });
+	
+	  t.selectAll("text")
+	      .attr("x", function(d) { return x(d.x); })
+	      .attr("y", function(d) { return y(d.y - (d.children ? 10 : 0)); })
+	      .style("opacity", function(d) { return k * d.r > 20 ? 1 : 0; });
+	
+	  node = d;
+	  d3.event.stopPropagation();
+	}
+});
+
+$(document).ready(function() {
+	var do_wheel = Math.random() < 0.5;
+	if (do_wheel) gewassen_wheel(); else gewassen_rotating_cluster();
 });
