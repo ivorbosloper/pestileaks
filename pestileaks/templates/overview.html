@@ -3,7 +3,25 @@
 {% block extrascript %}
 <link href="{% static 'datatables/css/jquery.dataTables.css' %}" rel="stylesheet">
 <link href="{% static 'datatables/css/dt_bootstrap.css' %}" rel="stylesheet">
+<style>
 
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node {
+  font: 10px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+</style>
 <script type="text/javascript" src="{% static 'd3js/d3.js' %}"></script>
 <script type="text/javascript" src="{% static 'datatables/js/jquery.dataTables.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'pestileaks/js/d3_gewassen.js' %}"></script>
@@ -120,6 +138,11 @@ $(document).ready(function(){
 		      	<tr><th>middel</th><th>fabrikant</th><th>toelating</th></tr>
 	      		</thead>
 		      </table>
+	    </div>
+	  </div>
+      <div class="row">
+        <div class="col-lg-12">
+    	  <div id="middelen-graphic"></div>
 	    </div>
 	  </div>
 	</div>
