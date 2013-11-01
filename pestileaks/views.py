@@ -63,8 +63,8 @@ def gewassen(request):
 def middelen(request):
     minsize = int(request.GET['minsize']) if request.GET['minsize'] else 0
     middel_per_bedrijf = []
-    for bedrijf,iter in itertools.groupby(Middel.objects.all().order_by('bedrijf', 'naam'), lambda m: m.bedrijf):
-        middelen = list(iter)
+    for bedrijf, lst in itertools.groupby(Middel.objects.all().order_by('bedrijf', 'naam'), lambda m: m.bedrijf):
+        middelen = list(lst)
         if len(middelen) > minsize: middel_per_bedrijf.append({'name':bedrijf, 'children':[{'name': m.naam} for m in middelen]})
     return HttpResponse(json.dumps(middel_per_bedrijf), content_type="application/json")
     
