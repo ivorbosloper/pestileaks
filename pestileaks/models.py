@@ -1,4 +1,5 @@
 from django.db.models import Model, ForeignKey, CharField, IntegerField, FloatField, SmallIntegerField, NullBooleanField
+from django.db.models.fields import TextField
 
 class Gewas(Model):
     #1       Teeltgroepen, toepassingssectoren
@@ -11,8 +12,8 @@ class Gewas(Model):
                                        (4, '4. Gewas')) )
     edi_code = CharField(max_length=10)
     edi_naam = CharField(max_length=255)
-    edi_periode = CharField(max_length=50, blank=True, null=True)
-    edi_teeltdoel = CharField(max_length=255, blank=True, null=True)
+    edi_periode = CharField(max_length=50, blank=True, null=True)    #komma-gescheiden opties, TODO: n-m koppeling
+    edi_teeltdoel = CharField(max_length=255, blank=True, null=True) #komma-gescheiden opties, TODO: n-m koppeling
 
     teelt_onbedekt = NullBooleanField()
     teelt_bedekt = NullBooleanField()
@@ -42,17 +43,21 @@ class Gewas(Model):
         ordering = ['edi_naam','edi_code']
         verbose_name_plural = "gewassen"    
 
+class TeeltDoel(Model):
+    naam = CharField(max_length=250, blank=False, null=False, unique=True)
+    edi_code = CharField(max_length=10)
+
 class ToepassingsMethode(Model):
-    naam = CharField(max_length=50, blank=False, null=False, unique=True)
+    naam = CharField(max_length=250, blank=False, null=False, unique=True)
     #identifier = CharField(max_length=10, blank=False, null=False, unique=True)
 
     def __unicode__(self):
         return self.naam
 
 class Middel(Model):
-    naam = CharField(max_length=50, blank=False, null=False)
+    naam = CharField(max_length=250, blank=False, null=False)
     toelatings_nummer = CharField(max_length=10, blank=False, null=False, unique=True)
-    bedrijf = CharField(max_length=50, blank=True)
+    bedrijf = CharField(max_length=250, blank=True)
     eenheid = CharField(max_length=10, blank=True)
 
     def __unicode__(self):
@@ -72,11 +77,19 @@ class Aantasting(Model):
         ordering = ['naam']
         verbose_name_plural = "aantastingen"
 
+#BEDEKKING_TYPES = (("", "ongedefinieerd"), ("bedekt", "Bedekt"),("onbedekt", "Onbedekt"),)
+
 class GebruiksRegel(Model):
-    gewas = ForeignKey(Gewas, null=False, blank=False)
     middel = ForeignKey(Middel, null=False, blank=False)
-    toepassings_methode = ForeignKey(ToepassingsMethode, null=False, blank=False)
-    aantasting = ForeignKey(Aantasting)
+
+    gewas = ForeignKey(Gewas, null=True, blank=True)
+    teeltdoel = ForeignKey(TeeltDoel, null=True, blank=True)
+#    bedekking = CharField(max_length=50, blank=True, null=False, choices=BEDEKKING_TYPES)
+    #gewas_doel = ForeignKey(GewasDoel, null=True, blank=True)
+    toepassings_methode = ForeignKey(ToepassingsMethode, null=True, blank=True)
+    aantasting = ForeignKey(Aantasting, null=True, blank=True)
+
+    filters = TextField(default='') # vrij formaat (json) filters, later oplossen/structureren
 
     veiligheidstermijn = IntegerField(null=True, blank=True)
     wachttijd_betreding = IntegerField(null=True, blank=True)
