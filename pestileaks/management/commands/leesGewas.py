@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 class Command(BaseCommand):
     
     def handle(self, *args, **options):
-        doc = xlrd.open_workbook("doc/dtg/EdiTeelt_DR_Mestwet_gewassen.xlsx")
+        doc = xlrd.open_workbook("doc/dtg/EdiTeelt_DR_Mestwet_gewassen.xls")
         for sheet in doc.sheets():
             # read all rows from 3
             for rx in range(2, sheet.nrows):

@@ -68,7 +68,7 @@ class Middel(Model):
         verbose_name_plural = "middelen"
         
 class Aantasting(Model):
-    naam = CharField(max_length=50, blank=False, null=False, unique=True)
+    naam = CharField(max_length=250, blank=False, null=False, unique=True)
 
     def __unicode__(self):
         return self.naam
