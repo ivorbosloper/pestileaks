@@ -3,7 +3,6 @@ from django.core.management.base import BaseCommand
 from pestileaks.models import Middel
 import requests
 import unicodecsv
-import codecs
 
 logger = logging.getLogger(__name__)
 BASE_URL = "http://www.ctgb.nl/ctb_files/"
