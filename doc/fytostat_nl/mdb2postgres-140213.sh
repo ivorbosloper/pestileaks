@@ -1,4 +1,8 @@
-## Exporteer de mdb naar sqlimport
+## Zaken die handmatig eerst geregeld moeten worden
+# 1. apt-get install mdb-tools
+# 2. postgres db 'fytostatdb' aanmaken
+
+## Exporteer de mdb naar sqlimport. mdb-tools zorgt niet voor een volledig goede export naar postgres
 mdb-schema --drop-table dat_Fyra.mdb postgres > tmp1.sql
 ## Splits de sqlimport in tmp1a: create tables en zo tmp1b: constraints en indexes
 cat tmp1.sql|
@@ -16,14 +20,14 @@ sed -n """
 /ADD\ CONSTRAINT/p; 
 """ > tmp1b.sql
 
-psql testdb5 < tmp1a.sql
+psql fytostatdb < tmp1a.sql
 ## Haal de namen van alle tabellen uit de db 
-echo "\dt" | psql testdb5|awk -F "|" '{print $2}'|sed -e :a -e '$d;N;2,1ba' -e 'P;D'|sed -n '4,$p'|sed 's/^\ //g'|sed 's/[\ ]\{1,\}$//g' > tmp2
+echo "\dt" | psql fytostatdb|awk -F "|" '{print $2}'|sed -e :a -e '$d;N;2,1ba' -e 'P;D'|sed -n '4,$p'|sed 's/^\ //g'|sed 's/[\ ]\{1,\}$//g' > tmp2
 ## Voeg voor elke tabel uit db de gegevens toe.
 while read table;do
 	echo '--------------------------'
 	echo '--- '$table' --- '
-	echo "delete from \"$table\";"| psql testdb5
+	echo "delete from \"$table\";"| psql fytostatdb 
 	mdb-export -I postgres -d 'QQQ' dat_Fyra.mdb "$table"|
 	#maak de output van mdb-export (beter) geschikt voor import ps 
 	#0. verwijder EOL's die problemen geven (bv in FytoDisclaimer)
@@ -50,11 +54,13 @@ while read table;do
 	#8. Lijnsplitsing op 'VALUES' uit punt 1 weer ongedaan gemaakt.
 	sed ':a;N;$!ba;s/\nVALUES/VALUES/g' > tmp1.sql
 	# Importeer data in db	
-	psql testdb5 < tmp1.sql
+	psql fytostatdb < tmp1.sql
 done < tmp2
 ## Voeg indexen/relaties uit sql toe.
-psql testdb5 < tmp1b.sql
+psql fytostat.db < tmp1b.sql
 
+## Exporteer de database eventueel naar sql output
+pg_dump -c --no-owner fytostatdb > dat_Fyra.psql
 ## Ruim op
 rm tmp1.sql tmp1a.sql tmp1b.sql tmp2
 
