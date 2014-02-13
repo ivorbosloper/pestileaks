@@ -1,5 +1,5 @@
 ## Exporteer de mdb naar sqlimport
-mdb-schema --drop-table fytostat.mdb postgres > tmp1.sql
+mdb-schema --drop-table dat_Fyra.mdb postgres > tmp1.sql
 ## Splits de sqlimport in tmp1a: create tables en zo tmp1b: constraints en indexes
 cat tmp1.sql|
 sed /'CREATE INDEX'/d|
@@ -24,7 +24,7 @@ while read table;do
 	echo '--------------------------'
 	echo '--- '$table' --- '
 	echo "delete from \"$table\";"| psql testdb5
-	mdb-export -I postgres -d 'QQQ' fytostat.mdb "$table"|
+	mdb-export -I postgres -d 'QQQ' dat_Fyra.mdb "$table"|
 	#maak de output van mdb-export (beter) geschikt voor import ps 
 	#0. verwijder EOL's die problemen geven (bv in FytoDisclaimer)
 	sed ':a;N;$!ba;s/\r\n//g'|
