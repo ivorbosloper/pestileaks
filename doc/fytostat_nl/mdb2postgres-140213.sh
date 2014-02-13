@@ -63,8 +63,3 @@ psql fytostat.db < tmp1b.sql
 pg_dump -c --no-owner fytostatdb > dat_Fyra.psql
 ## Ruim op
 rm tmp1.sql tmp1a.sql tmp1b.sql tmp2
-
-## Opmerkingen
-#+ Als je script meer dan 1 keer draait, dan verschijnen er foutmeldingen bij het aanmaken van constraints
-#  Dit komt omdat 'mdb-schema --drop-table' niet indexes en constraints verwijderd en er dan bij CREATE
-#  problemen ontstaan omdat een index of constraint al bestaat. Je kunt dus het beste steeds met een nieuwe db beginnen.
