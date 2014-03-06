@@ -1,5 +1,5 @@
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
-from models import Gewas, ToepassingsMethode, Middel, Aantasting, GebruiksRegel
+from models import CtgbToelating, CtgbWerkzamestof, , Gewas, ToepassingsMethode, Middel, Aantasting, GebruiksRegel
 from django.db.models import Q
 import operator
 
@@ -21,6 +21,19 @@ class GewasResource(ModelResource):
         filtering = {
             'naam': ALL,
         }
+
+class CtgbToelatingResource(ModelResource):
+	class Meta:
+		queryset = CtgbToelating.objects.all()
+		ordering=['toelatingnr', 'middelnaam','toelatinghouder','MAP','Moedertoelating']
+
+class CtgbWerkzamestofResource(ModelResource):
+	class Meta:
+		queryset = CtgbWerkzamestof.objects.all()
+
+class CtgbHoeveelheidResource(ModelResource):
+	class Meta:
+		queryset = CtgbHoeveelheid.objects.all()
         
 class ToepassingsMethodeResource(ModelResource):
     class Meta:
