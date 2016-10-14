@@ -24,10 +24,7 @@ RUN apt-get update && apt-get install -y \
     libssl-dev libcurl4-openssl-dev \
     libxml2-dev libxslt1-dev python-dev libpcre3-dev \
     git \
-    supervisor nginx \
-#    memcached \
-#    build-essential \
-#    ssh \
+    supervisor \
     postgresql-9.5 postgresql-contrib-9.5 postgresql-client-9.5 postgresql-9.5-postgis-2.2 postgresql-server-dev-9.5 \
 && rm -rf /var/lib/apt/lists/*
 
@@ -45,16 +42,15 @@ RUN /etc/init.d/postgresql start &&\
     psql --command "update pg_database set datistemplate=true where datname='template1';" &&\
     createdb --encoding='UTF-8' --locale='en_US.UTF-8' ${DATABASE_NAME} 
 
-# TODO config logrotate (see SCAN)
-# RUN cp ${DATADIR}scan_project/config/logrotate/* /etc/logrotate.d/
+# TODO config logrotate
+# RUN cp ${DATADIR}project/config/logrotate/* /etc/logrotate.d/
 
 # install pestileaks
-# Use the 'live_2013' tag, because that one works and the master does not work
 USER pestileaks
 WORKDIR /home/pestileaks
-RUN git clone -b live_2013 https://github.com/ivorbosloper/pestileaks.git
+RUN git clone https://github.com/ivorbosloper/pestileaks.git
 RUN virtualenv --no-site-packages env
-COPY local_settings.py /home/pestileaks/pestileaks/pestileaks
+COPY local_settings_container.py /home/pestileaks/pestileaks/pestileaks/local_settings.py
 COPY deploy.sh /home/pestileaks/pestileaks
 RUN mkdir /home/pestileaks/run
 RUN . /home/pestileaks/pestileaks/deploy.sh
@@ -62,13 +58,6 @@ RUN . /home/pestileaks/pestileaks/deploy.sh
 # Config supervisor to run pestileaks
 USER root
 COPY supervisor/pestileaks.conf /etc/supervisor/conf.d/
-
-# nginx
-USER root
-COPY nginx/pestileaks.conf /etc/nginx/sites-available/
-RUN ln -s /etc/nginx/sites-available/pestileaks.conf /etc/nginx/sites-enabled/pestileaks.conf
-RUN rm /etc/nginx/sites-enabled/default
-RUN useradd -s /bin/false nginx
 
 VOLUME /home/pestileaks/run
 
