@@ -64,4 +64,3 @@ VOLUME /home/pestileaks/run
 COPY entrypoint.sh /opt/docker-entrypoint.sh
 ENTRYPOINT ["/bin/bash", "/opt/docker-entrypoint.sh"]
 
-EXPOSE 80
