@@ -1,7 +1,7 @@
 from annoying.decorators import render_to
 import json
 from django.http import HttpResponse
-from pestileaks.models import Gewas, GebruiksRegel, Aantasting, Middel
+from pestileaks.models import CtgbToelating, CtgbWerkzamestof, CtgbHoeveelheid, Gewas, GebruiksRegel, Aantasting, Middel
 from collections import OrderedDict
 import itertools
 

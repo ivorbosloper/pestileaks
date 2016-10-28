@@ -1,4 +1,4 @@
-from django.db.models import Model, ForeignKey, CharField, IntegerField, FloatField, SmallIntegerField, NullBooleanField
+from django.db.models import Model, ForeignKey, CharField, IntegerField, FloatField, SmallIntegerField, NullBooleanField, DateField
 from django.db.models.fields import TextField
 
 class Gewas(Model):
@@ -47,6 +47,35 @@ class TeeltDoel(Model):
     naam = CharField(max_length=250, blank=False, null=False, unique=True)
     edi_code = CharField(max_length=10)
 
+
+class CtgbToelating(Model):
+   toelatingnr = IntegerField(null=True)
+   middelnaam = CharField(max_length=250, blank=False, null=False)
+   MAP = CharField(max_length=250, blank=False, null=False)
+   toelatinghouder = CharField(max_length=250, blank=False, null=True)
+   Moedertoelating = IntegerField(null=True)
+   startdatum = DateField(null=True)
+   expiratiedatum = DateField(null=True)
+   biogewas = CharField(max_length=250, blank=False, null=True)
+   werkzamestoftot = CharField(max_length=250, blank=False, null=True)
+   toepassing = CharField(max_length=250, blank=False, null=True)
+   pro_wcode = IntegerField(null=True)
+   pro_opgebruikdatum = DateField(null=True)
+   pro_afleverdatum = DateField(null=True)
+   nopro_wcode = IntegerField(null=True)
+   nopro_opgebruikdatum = DateField(null=True)
+   nopro_afleverdatum = DateField(null=True)
+   toegelaten_janee = IntegerField(null=False)
+
+class CtgbWerkzamestof(Model):
+   toelatingnr = IntegerField(null=True)
+   werkzamestof = CharField(max_length=250,blank=False,null=True)
+
+class CtgbHoeveelheid(Model):
+   toelatingnr = IntegerField(null=True)
+   werkzamestof = CharField(max_length=250,blank=False,null=True)
+   concentratie = CharField(max_length=250,blank=False,null=True)
+
 class ToepassingsMethode(Model):
     naam = CharField(max_length=250, blank=False, null=False, unique=True)
     #identifier = CharField(max_length=10, blank=False, null=False, unique=True)
@@ -82,6 +111,7 @@ class Aantasting(Model):
 class GebruiksRegel(Model):
     middel = ForeignKey(Middel, null=False, blank=False)
 
+    #test = ForeignKey(Test, null=True, blank=True)  # kan denk ik weg, Rik #weggehaald, check of goed gaat!
     gewas = ForeignKey(Gewas, null=True, blank=True)
     teeltdoel = ForeignKey(TeeltDoel, null=True, blank=True)
 #    bedekking = CharField(max_length=50, blank=True, null=False, choices=BEDEKKING_TYPES)
@@ -103,6 +133,7 @@ class GebruiksRegel(Model):
         return "%s %s %s %s" % (self.gewas, self.middel, self.toepassings_methode, self.aantasting)
 
     class Meta:
+        #ordering = ['test', 'gewas', 'middel', 'toepassings_methode', 'aantasting']
         ordering = ['gewas', 'middel', 'toepassings_methode', 'aantasting']
         verbose_name_plural = "gebruiksregels"
 
